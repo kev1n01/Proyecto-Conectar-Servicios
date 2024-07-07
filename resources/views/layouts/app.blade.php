@@ -1,49 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Mi Aplicación')</title>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <style>
-        :root {
-            --primary-color: {{ config('branding.primary') }};
-            --secondary-color: {{ config('branding.secondary') }};
-            --success-color: {{ config('branding.success') }};
-            --danger-color: {{ config('branding.danger') }};
-            --warning-color: {{ config('branding.warning') }};
-            --info-color: {{ config('branding.info') }};
-            --light-color: {{ config('branding.light') }};
-            --dark-color: {{ config('branding.dark') }};
-        }
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        body {
-            background-color: var(--light-color);
-            color: var(--dark-color);
-        }
+        <title>{{ config('app.name', 'Laravel') }}</title>
 
-        .navbar {
-            background-color: var(--primary-color);
-        }
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-        .btn-primary {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-        }
-
-        .btn-secondary {
-            background-color: var(--secondary-color);
-            border-color: var(--secondary-color);
-        }
-    </style>
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="#">Mi Aplicación</a>
-    </nav>
-
-    <div class="container">
-        @yield('content')
-    </div>
-</body>
+        <!-- Scripts -->
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    </head>
+    <body>            
+        <div class="container">
+            {{ $slot }}
+        </div>
+    </body>
 </html>
