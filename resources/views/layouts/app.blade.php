@@ -14,7 +14,8 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body>            
+    <body>           
+        <x-navigation />
         <div class="container">
             {{ $slot }}
         </div>
