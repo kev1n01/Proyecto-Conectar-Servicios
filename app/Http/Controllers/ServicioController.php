@@ -2,18 +2,47 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Proveedor;
 use App\Models\Servicio;
 use Illuminate\Http\Request;
 
 class ServicioController extends Controller
 {
     /**
-     * Mostrar una lista de servicios.
+     * Mostrar toda los servicios.
      */
     public function index()
     {
         $servicios = Servicio::all();
-        return response()->json(['servicios' => $servicios], 200);
+        $ciudadesRegistradas = Proveedor::pluck('ciudad');
+        return view('cliente.index', compact('servicios', 'ciudadesRegistradas'));
+    }
+
+    /**
+     * Mostrar el formulario para crear un nuevo servicio.
+     */
+    public function create()
+    {
+
+        $categorias = [
+            'Limpieza del Hogar',
+            'Plomería',
+            'Electricidad',
+            'Jardinería',
+            'Pintura',
+            'Mudanzas',
+            'Reparación de Electrodomésticos',
+            'Belleza y Spa',
+            'Entrenamiento Personal',
+            'Cuidado de Mascotas',
+            'Cerrajería',
+            'Albañilería',
+            'Carpintería',
+            'Tecnología',
+            'Asesoría Legal'
+        ];
+
+        return view('proveedor.crear-servicio', compact('categorias'));
     }
 
     /**
@@ -22,18 +51,22 @@ class ServicioController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre' => 'required|string|max:255',
+            'nombre' => 'required|string|max:100',
+            'categoria' => 'required|string',
             'descripcion' => 'required|string',
             'precio' => 'required|numeric',
         ]);
 
-        $servicio = Servicio::create([
+        Servicio::create([
             'nombre' => $request->nombre,
+            'categoria' => $request->categoria,
             'descripcion' => $request->descripcion,
             'precio' => $request->precio,
+            'proveedor_id' => auth()->user()->id,
         ]);
 
-        return response()->json(['servicio' => $servicio], 201);
+        return redirect(route('crear-servicio'))
+            ->with('success', 'Servicio creado correctamente.');
     }
 
     /**
@@ -42,7 +75,7 @@ class ServicioController extends Controller
     public function show($id)
     {
         $servicio = Servicio::findOrFail($id);
-        return response()->json(['servicio' => $servicio], 200);
+        return view('cliente.ver', compact('servicio'));
     }
 
     /**

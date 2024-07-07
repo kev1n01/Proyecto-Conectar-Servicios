@@ -16,8 +16,8 @@
     </head>
     <body>           
         <x-navigation />
-        <div class="container">
+        <main>
             {{ $slot }}
-        </div>
+        <main/>
     </body>
 </html>

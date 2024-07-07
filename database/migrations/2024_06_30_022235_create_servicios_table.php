@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('servicios', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
+            $table->string('categoria');
             $table->text('descripcion');
-            $table->float('precio');
+            $table->float('precio', 8, 2);
+            $table->foreignId('proveedor_id')->constrained('proveedors');
             $table->timestamps();
         });
     }

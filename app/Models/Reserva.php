@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reserva extends Model
 {
-    protected $fillable = ['fecha', 'hora', 'usuario_id', 'proveedor_id'];
+    protected $fillable = ['fecha', 'hora', 'user_id', 'proveedor_id'];
 
-    public function usuario()
+    public function user()
     {
-        return $this->belongsTo(Usuario::class);
+        return $this->belongsTo(User::class);
     }
 
     public function proveedor()

@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('pagos', function (Blueprint $table) {
             $table->id();
-            $table->float('total');
             $table->date('fecha');
-            $table->foreignId('usuario_id')->constrained('usuarios');
+            $table->string('metodo'); // Valores posibles: 'efectivo', 'tarjeta', 'yape
             $table->foreignId('reserva_id')->constrained('reservas');
             $table->timestamps();
         });

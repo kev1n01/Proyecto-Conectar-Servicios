@@ -39,11 +39,9 @@
                 </a>
             @endif
 
-            <x-secondary-button class="ms-3">
-                <a class="no-underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('register') }}">
+                <a class="inline-flex items-center px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-500 rounded-md font-semibold text-xs  uppercase tracking-widest shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none ms-3 no-underline  text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 " href="{{ route('register') }}">
                     {{ __('Registrarme') }}
                 </a>
-            </x-secondary-button>
             <x-primary-button class="ms-3">
                 {{ __('Ingresar') }}
             </x-primary-button>

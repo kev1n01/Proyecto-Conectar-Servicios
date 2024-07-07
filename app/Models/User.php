@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Authenticatable
 {
-    protected $fillable = ['name', 'email', 'password'];
+    use HasFactory;
+    
+    protected $fillable = ['name', 'email', 'password', 'rol'];
 
     public function reservas()
     {

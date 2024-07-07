@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pago extends Model
 {
-    protected $fillable = ['total', 'fecha', 'usuario_id', 'reserva_id'];
+    protected $fillable = ['total', 'fecha', 'user_id', 'reserva_id'];
 
     public function usuario()
     {
-        return $this->belongsTo(Usuario::class);
+        return $this->belongsTo(User::class);
     }
 
     public function reserva()

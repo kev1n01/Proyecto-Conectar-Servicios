@@ -12,8 +12,8 @@ class ReservaController extends Controller
      */
     public function index()
     {
-        $reservas = Reserva::with(['usuario', 'proveedor'])->get();
-        return response()->json(['reservas' => $reservas], 200);
+        $reservas = Reserva::all();
+        return view('proveedor.index', compact('reservas'));
     }
 
     /**

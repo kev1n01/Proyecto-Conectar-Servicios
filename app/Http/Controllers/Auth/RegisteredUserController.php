@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Proveedor;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -31,7 +32,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'rol' => ['required', 'in:cliente,proveedor'],
         ]);
@@ -47,6 +48,14 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        if($user && $user->rol === 'proveedor') { // Si el usuario se creo correctamente y es un proveedor
+            Proveedor::create([
+                'user_id' => $user->id
+            ]);
+
+            return redirect(route('reservas', absolute: false));            
+        }else{
+            return redirect(route('servicios', absolute: false));
+        }
     }
 }

@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('proveedors', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->string('servicio');
-            $table->float('calificacion')->default(0);
+            $table->string('biografia')->nullable();
+            $table->string('ciudad')->nullable();
+            $table->integer('calificacion')->default(0)->nullable();
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }

@@ -2,8 +2,6 @@
 
 ## Pasos 
 
-    - Aceptar los `Pull Request`
-
 1. **ejecutar en terminal los comandos**
     ```bash
     composer install

@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('reservas', function (Blueprint $table) {
             $table->id();
             $table->date('fecha');
-            $table->time('hora');
-            $table->foreignId('usuario_id')->constrained('usuarios');
-            $table->foreignId('proveedor_id')->constrained('proveedors');
+            $table->string('estado'); // Valores posibles: 'en progreso', 'completada', 'cancelada'
+            $table->foreignId('user_id')->constrained('users'); // id del usuario cliente
+            $table->foreignId('servicio_id')->constrained('servicios'); //id del servicio reservado
             $table->timestamps();
         });
     }

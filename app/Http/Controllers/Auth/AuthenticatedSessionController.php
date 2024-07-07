@@ -28,7 +28,13 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        $user = Auth::user();
+        
+        if($user && $user->rol === 'proveedor') { // Si el usuario se creo correctamente y es un proveedor
+            return redirect(route('reservas', absolute: false));            
+        }else{
+            return redirect(route('servicios', absolute: false));
+        }
     }
 
     /**
