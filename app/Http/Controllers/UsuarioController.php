@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Usuario;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +20,7 @@ class UsuarioController extends Controller
             'contraseña' => 'required|string|min:8|confirmed',
         ]);
 
-        $usuario = Usuario::create([
+        $usuario = User::create([
             'nombre' => $request->nombre,
             'correo' => $request->correo,
             'contraseña' => Hash::make($request->contraseña),
@@ -53,7 +53,7 @@ class UsuarioController extends Controller
      */
     public function show($id)
     {
-        $usuario = Usuario::findOrFail($id);
+        $usuario = User::findOrFail($id);
         return response()->json(['usuario' => $usuario], 200);
     }
 
@@ -62,7 +62,7 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $usuario = Usuario::findOrFail($id);
+        $usuario = User::findOrFail($id);
 
         $request->validate([
             'nombre' => 'sometimes|required|string|max:255',
@@ -85,7 +85,7 @@ class UsuarioController extends Controller
      */
     public function destroy($id)
     {
-        $usuario = Usuario::findOrFail($id);
+        $usuario = User::findOrFail($id);
         $usuario->delete();
 
         return response()->json(['message' => 'Usuario eliminado exitosamente'], 200);
