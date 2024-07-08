@@ -83,6 +83,6 @@ class ProveedorController extends Controller
         $proveedor->ciudad = $request->ciudad;
         $proveedor->save();
         return redirect(route('mi-informacion', $id))
-        ->with('success', 'Proveedor actualizado correctamente.');;
+        ->with('success', 'Datos actualizados correctamente.');;
     }
 }

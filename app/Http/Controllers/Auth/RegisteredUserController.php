@@ -48,13 +48,12 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        if($user && $user->rol === 'proveedor') { // Si el usuario se creo correctamente y es un proveedor
+        if ($user && $user->rol === 'proveedor') { // Si el usuario se creo correctamente y es un proveedor
             Proveedor::create([
                 'user_id' => $user->id
             ]);
-
-            return redirect(route('reservas', absolute: false));            
-        }else{
+            return redirect(route('mi-informacion', $user->id, absolute: false));
+        } else {
             return redirect(route('servicios', absolute: false));
         }
     }

@@ -5,6 +5,11 @@
                 {{ session('success') }}
             </div>
         @endif
+        @if ($proveedor->ciudad === null)
+            <div class="w-full bg-blue-300 shadow-lg rounded-lg p-6">
+               Es necesario actualizar su ciudad y biografia
+            </div>
+        @endif
         <div class="w-full bg-slate-800 shadow-lg rounded-lg p-6 mt-6 overflow-hidden">
 
             <form method="POST" action="{{ route('proveedor.actualizar', auth()->user()->id) }}" class="flex flex-col">

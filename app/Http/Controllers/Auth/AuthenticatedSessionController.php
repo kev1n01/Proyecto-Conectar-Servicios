@@ -31,7 +31,11 @@ class AuthenticatedSessionController extends Controller
         $user = Auth::user();
         
         if($user && $user->rol === 'proveedor') { // Si el usuario se creo correctamente y es un proveedor
-            return redirect(route('reservas', absolute: false));            
+            if($user->proveedor->ciudad === null){
+                return redirect(route('mi-informacion', $user->id, absolute: false));
+            }else{
+                return redirect(route('reservas', absolute: false));           
+            }
         }else{
             return redirect(route('servicios', absolute: false));
         }

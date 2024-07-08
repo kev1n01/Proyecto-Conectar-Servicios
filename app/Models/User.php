@@ -22,4 +22,10 @@ class User extends Authenticatable
         
         return $this->hasMany(Pago::class);
     }
+
+    public function proveedor()
+    {
+        return $this->hasOne(Proveedor::class);
+    }
+    
 }

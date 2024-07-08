@@ -17,7 +17,7 @@
 
                 <div class="mt-4">
                     <x-input-label for="categoria" :value="__('Categoria')" />
-                    <select :value="old('categoria')" name="categoria" id="categoria" required
+                    <select value="old('categoria')" name="categoria" id="categoria" required
                         class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm w-full">
                         <option value="">Seleccione una categoria</option>
                         @foreach ($categorias as $categoria)
@@ -29,7 +29,7 @@
                 <div class="mt-4">
                     <x-input-label for="descripcion" :value="__('Descripcion')" />
                     <textarea class="block mt-1 w-full dark:text-gray-300 border-gray-300 dark:border-gray-700 dark:bg-gray-900 rounded-md"
-                        :value="old('descripcion')" name="descripcion" id="descripcion" cols="30" rows="2"></textarea>
+                        value="old('descripcion')" name="descripcion" id="descripcion" cols="30" rows="2"></textarea>
                     <x-input-error :messages="$errors->get('descripcion')" class="mt-2" />
                 </div>
 

@@ -96,36 +96,4 @@ class ServicioController extends Controller
         $servicio = Servicio::findOrFail($id);
         return view('cliente.ver', compact('servicio'));
     }
-
-    /**
-     * Actualizar un servicio específico.
-     */
-    public function update(Request $request, $id)
-    {
-        $servicio = Servicio::findOrFail($id);
-
-        $request->validate([
-            'nombre' => 'sometimes|required|string|max:255',
-            'descripcion' => 'sometimes|required|string',
-            'precio' => 'sometimes|required|numeric',
-        ]);
-
-        $servicio->nombre = $request->get('nombre', $servicio->nombre);
-        $servicio->descripcion = $request->get('descripcion', $servicio->descripcion);
-        $servicio->precio = $request->get('precio', $servicio->precio);
-        $servicio->save();
-
-        return response()->json(['servicio' => $servicio], 200);
-    }
-
-    /**
-     * Eliminar un servicio específico.
-     */
-    public function destroy($id)
-    {
-        $servicio = Servicio::findOrFail($id);
-        $servicio->delete();
-
-        return response()->json(['message' => 'Servicio eliminado exitosamente'], 200);
-    }
 }
