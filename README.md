@@ -8,12 +8,18 @@
     npm install
     ```
 
-2. **migrar nuevas tablas**
+2. **migrar nuevas tablas y seeders para datos de prueba**
     ```bash
-    php artisan migration:refresh
+    php artisan migration:refresh --seed
+    ```
+3. **crea y configura archivo .env**
+
+4. **copia contenido del archivo .env.example y genera key**
+    ```bash
+    php artisan key:generate
     ```
 
-3. **inicar servidor artisan y node**
+5. **inicar servidor artisan y node**
     ```bash
     php artisan serve
     npm run dev
