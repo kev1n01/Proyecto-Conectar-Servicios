@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->date('fecha');
             $table->string('estado'); // Valores posibles: 'en progreso', 'completada', 'cancelada'
-            $table->foreignId('user_id')->constrained('users'); // id del usuario cliente
+            $table->foreignId('user_id')->constrained('users'); // id del usuario 
             $table->foreignId('servicio_id')->constrained('servicios'); //id del servicio reservado
             $table->timestamps();
         });
