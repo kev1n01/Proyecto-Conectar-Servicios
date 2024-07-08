@@ -8,14 +8,51 @@ use Illuminate\Http\Request;
 
 class ServicioController extends Controller
 {
+    public $categorias = [
+        'Limpieza del Hogar',
+        'Plomería',
+        'Electricidad',
+        'Jardinería',
+        'Pintura',
+        'Mudanzas',
+        'Reparación de Electrodomésticos',
+        'Belleza y Spa',
+        'Entrenamiento Personal',
+        'Cuidado de Mascotas',
+        'Cerrajería',
+        'Albañilería',
+        'Carpintería',
+        'Tecnología',
+        'Asesoría Legal'
+    ];
+
     /**
      * Mostrar toda los servicios.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $servicios = Servicio::all();
-        $ciudadesRegistradas = Proveedor::pluck('ciudad');
-        return view('cliente.index', compact('servicios', 'ciudadesRegistradas'));
+        $categorias = $this->categorias;
+        $ciudadesRegistradas = Proveedor::pluck('ciudad')->unique();
+    
+        $query = Servicio::query();
+    
+        if ($request->filled('search')) {
+            $query->where('nombre', 'like', '%' . $request->search . '%');
+        }
+    
+        if ($request->filled('ciudad')) {
+            $query->whereHas('proveedor', function ($q) use ($request) {
+                $q->where('ciudad', $request->ciudad);
+            });
+        }
+    
+        if ($request->filled('categoria')) {
+            $query->where('categoria', $request->categoria);
+        }
+    
+        $servicios = $query->get();
+    
+        return view('cliente.index', compact('servicios', 'ciudadesRegistradas', 'categorias'));
     }
 
     /**
@@ -23,25 +60,7 @@ class ServicioController extends Controller
      */
     public function create()
     {
-
-        $categorias = [
-            'Limpieza del Hogar',
-            'Plomería',
-            'Electricidad',
-            'Jardinería',
-            'Pintura',
-            'Mudanzas',
-            'Reparación de Electrodomésticos',
-            'Belleza y Spa',
-            'Entrenamiento Personal',
-            'Cuidado de Mascotas',
-            'Cerrajería',
-            'Albañilería',
-            'Carpintería',
-            'Tecnología',
-            'Asesoría Legal'
-        ];
-
+        $categorias = $this->categorias;
         return view('proveedor.crear-servicio', compact('categorias'));
     }
 
